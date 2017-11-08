@@ -11,83 +11,64 @@ public class CsvImporter {
 	private String csvSeparator;
 	private BufferedReader bufferReader;
 	private static CsvImporter instance;
-	
+
 	private CsvImporter() {
-		
+
 	}
-	
+
 	public static CsvImporter getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new CsvImporter();
 		}
-		
+
 		return instance;
 	}
-	
-	public void run() {
-
-	    String arquivoCSV = "arquivo.csv";
-	    BufferedReader br = null;
-	    String linha = "";
-	    String csvDivisor = ",";
-	    try {
-
-	        br = new BufferedReader(new FileReader(arquivoCSV));
-	        while ((linha = br.readLine()) != null) {
-
-	            String[] pais = linha.split(csvDivisor);
-
-	            System.out.println("País [code= " + pais[pais.length-2] 
-	                                 + " , name=" + pais[pais.length-1] + "]");
-
-	        }
-
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    } finally {
-	        if (br != null) {
-	            try {
-	                br.close();
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }
-	  }
 
 	public CsvImporter build() {
-		String line = "";
 		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(getPathToFile()));
-			setBufferReader(bufferedReader);
+			trySetBufferReader();
 			tryReadCsvHeader();
 			tryReadCsvData();
-		}catch (FileNotFoundException e) {
-			//explode mine exception here
+		} catch (FileNotFoundException e) {
+			// explode mine exception here
 		} catch (IOException e) {
-			//explode mine exception here
+			// explode mine exception here
+		} finally {
+			tryCloseCsvFile();
 		}
-		
+
 		return this;
+	}
+
+	private void trySetBufferReader() throws FileNotFoundException {
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(getPathToFile()));
+		setBufferReader(bufferedReader);
+	}
+
+	private void tryCloseCsvFile() {
+		if (getBufferReader() != null) {
+			try {
+				getBufferReader().close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				// minha excessao aqui tentando fechar o arquivo.
+			}
+		}
 	}
 
 	private void tryReadCsvData() throws IOException {
 		String line;
-		while((line = getBufferReader().readLine()) != null) {
+		while ((line = getBufferReader().readLine()) != null) {
 			String[] data = line.split(getCsvSeparator());
-			//create data
+			// create data
 		}
 	}
 
 	private void tryReadCsvHeader() throws IOException {
 		String line;
 		line = getBufferReader().readLine();
-		//create header
+		// create header
 	}
-
-
 
 	public String getPathToFile() {
 		return pathToFile;
