@@ -17,6 +17,7 @@ import br.com.jmf.exception.DataCorrupetedException;
 
 public class CsvReader implements FileReaderInterface{
 
+	private static final String MSG_FILE_CLOSED_WITH_SUCCESS = "File closed with success.";
 	private static final String MSG_PROBLEM_WHILE_TRYING_TO_CLOSE_FILE = "Problem while trying to close file.";
 	private static final String MSG_PROBLEM_READING_YOUR_FILE = "Problem reading your file.";
 	private static final String MSG_FILE_NOT_FOUND = "File Not Found, check your path.";
@@ -69,6 +70,7 @@ public class CsvReader implements FileReaderInterface{
 		if (getBufferReader() != null) {
 			try {
 				getBufferReader().close();
+				LOGGER.log(Level.INFO, MSG_FILE_CLOSED_WITH_SUCCESS);
 			} catch (IOException e) {
 				LOGGER.log(Level.SEVERE, MSG_PROBLEM_WHILE_TRYING_TO_CLOSE_FILE, e);
 			}
