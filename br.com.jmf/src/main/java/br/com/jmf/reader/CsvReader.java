@@ -14,11 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.jmf.exception.DataCorrupetedException;
+import br.com.jmf.exception.HeaderNotFoundException;
 import br.com.jmf.exception.MissingFileException;
 import br.com.jmf.exception.ReadingFileException;
 
 public class CsvReader implements FileReaderInterface{
 
+	private static final String MSG_FILE_WITHOUT_A_HEADER = "File without a header.";
 	private static final String MSG_MISSING_FILE_OR_WRONG_PATH = "Missing file or wrong path.";
 	private static final String MSG_FILE_CLOSED_WITH_SUCCESS = "File closed with success.";
 	private static final String MSG_PROBLEM_WHILE_TRYING_TO_CLOSE_FILE = "Problem while trying to close file.";
@@ -36,8 +38,8 @@ public class CsvReader implements FileReaderInterface{
 	private Logger LOGGER = Logger.getLogger(CsvReader.class.getName());
 	
 	private CsvReader() {
-		header = new ArrayList<String>();
-		data = new ArrayList<Map<String, String>>();
+		setHeader(new ArrayList<String>());
+		setData(new ArrayList<Map<String, String>>());
 	}
 
 	public static CsvReader getInstance() {
@@ -122,10 +124,18 @@ public class CsvReader implements FileReaderInterface{
 
 	private void tryReadCsvHeader() throws IOException {
 		String line = getBufferReader().readLine();
+		validateHeader(line);
+		
 		String[] splitHeader = line.split(getCsvSeparator());
 		for (String field : splitHeader) {
 			getHeader().add(field);
 		}
+	}
+
+	private void validateHeader(String line) {
+		if(line == null || line.trim().equals(""))
+			throw new HeaderNotFoundException(MSG_FILE_WITHOUT_A_HEADER);
+		
 	}
 
 	public String getPathToFile() {
