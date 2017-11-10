@@ -14,9 +14,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.jmf.exception.DataCorrupetedException;
+import br.com.jmf.exception.MissingFileException;
+import br.com.jmf.exception.ReadingFileException;
 
 public class CsvReader implements FileReaderInterface{
 
+	private static final String MSG_MISSING_FILE_OR_WRONG_PATH = "Missing file or wrong path.";
 	private static final String MSG_FILE_CLOSED_WITH_SUCCESS = "File closed with success.";
 	private static final String MSG_PROBLEM_WHILE_TRYING_TO_CLOSE_FILE = "Problem while trying to close file.";
 	private static final String MSG_PROBLEM_READING_YOUR_FILE = "Problem reading your file.";
@@ -52,8 +55,10 @@ public class CsvReader implements FileReaderInterface{
 			tryReadCsvData();
 		} catch (FileNotFoundException e) {
 			LOGGER.log(Level.SEVERE, MSG_FILE_NOT_FOUND, e);
+			throw new MissingFileException(MSG_MISSING_FILE_OR_WRONG_PATH);
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, MSG_PROBLEM_READING_YOUR_FILE, e);
+			throw new ReadingFileException("MSG_PROBLEM_READING_YOUR_FILE");
 		} finally {
 			tryCloseCsvFile();
 		}
