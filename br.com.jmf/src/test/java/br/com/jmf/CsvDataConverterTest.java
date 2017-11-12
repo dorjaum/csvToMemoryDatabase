@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.jmf.bean.CityDataBean;
-import br.com.jmf.bean.CityHeaderBean;
+import br.com.jmf.bean.city.CityDataBean;
+import br.com.jmf.bean.city.CityHeaderBean;
 import br.com.jmf.csv.converter.CsvDataConverter;
 
 public class CsvDataConverterTest {

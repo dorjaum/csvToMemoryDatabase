@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import br.com.jmf.bean.CityDataBean;
-import br.com.jmf.bean.CityHeaderBean;
-import br.com.jmf.reader.CsvReader;
+import br.com.jmf.bean.city.CityDataBean;
+import br.com.jmf.bean.city.CityHeaderBean;
 import br.com.jmf.reader.FileReaderInterface;
+import br.com.jmf.reader.csv.CsvReader;
 
 public class CsvDataConverter {
 

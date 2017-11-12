@@ -1,4 +1,4 @@
-package br.com.jmf.reader;
+package br.com.jmf.reader.csv;
 
 import static java.lang.String.format;
 
@@ -13,12 +13,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-
-import br.com.jmf.exception.DataCorrupetedException;
-import br.com.jmf.exception.HeaderNotFoundException;
-import br.com.jmf.exception.MissingFileException;
-import br.com.jmf.exception.ReadingFileException;
+import br.com.jmf.csv.exception.DataCorrupetedException;
+import br.com.jmf.csv.exception.HeaderNotFoundException;
+import br.com.jmf.csv.exception.MissingFileException;
+import br.com.jmf.csv.exception.ReadingFileException;
+import br.com.jmf.reader.FileReaderInterface;
 
 public class CsvReader implements FileReaderInterface{
 

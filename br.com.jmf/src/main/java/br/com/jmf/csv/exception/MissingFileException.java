@@ -1,4 +1,4 @@
-package br.com.jmf.exception;
+package br.com.jmf.csv.exception;
 
 public class MissingFileException extends RuntimeException {
 

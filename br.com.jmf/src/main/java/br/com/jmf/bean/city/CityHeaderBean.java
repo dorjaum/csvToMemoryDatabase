@@ -1,4 +1,4 @@
-package br.com.jmf.bean;
+package br.com.jmf.bean.city;
 
 public class CityHeaderBean {
 
