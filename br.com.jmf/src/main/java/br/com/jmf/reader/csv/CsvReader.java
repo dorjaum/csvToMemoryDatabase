@@ -158,9 +158,8 @@ public class CsvReader implements FileReaderInterface{
 		return this;
 	}
 
-	public CsvReader setCsvSeparator(String csvSeparator) {
+	public void setCsvSeparator(String csvSeparator) {
 		this.csvSeparator = csvSeparator;
-		return this;
 	}
 
 	public String getCsvSeparator() {

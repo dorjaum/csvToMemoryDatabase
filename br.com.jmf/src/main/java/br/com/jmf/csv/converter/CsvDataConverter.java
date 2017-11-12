@@ -21,7 +21,8 @@ public class CsvDataConverter {
 	public CsvDataConverter() {
 		setListCityHeaderBean(new ArrayList<CityHeaderBean>());
 		setListCityDataBean(new ArrayList<CityDataBean>());
-		getCsvReader().setCsvSeparator(SEPARATOR).setPathToFile(PATH_TO_CSV_FILE).build();
+		((CsvReader) getCsvReader()).setCsvSeparator(SEPARATOR);
+		 getCsvReader().setPathToFile(PATH_TO_CSV_FILE).build();
 	}
 
 	public FileReaderInterface getCsvReader() {

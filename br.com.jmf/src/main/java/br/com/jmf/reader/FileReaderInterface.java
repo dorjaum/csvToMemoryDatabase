@@ -9,8 +9,6 @@ public interface FileReaderInterface {
 	
 	public FileReaderInterface setPathToFile(String pathToFile);
 	
-	public FileReaderInterface setCsvSeparator(String separator);
-	
 	public List<String> getHeader();
 	
 	public List<Map<String, String>> getData();

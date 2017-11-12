@@ -21,62 +21,50 @@ public class CsvImporterTest {
 	
 	@Test
 	public void importDefaultFileSunday() {
-		CsvReader
-			.getInstance()
-			.setPathToFile(PATH_TO_CSV)
-			.setCsvSeparator(CSV_SEPARATOR)
-			.build();
+		CsvReader instance = CsvReader.getInstance();
+		instance.setCsvSeparator(CSV_SEPARATOR);
+		instance.setPathToFile(PATH_TO_CSV).build();
 	}
 	
 	@Test(expected = MissingFileException.class)
 	public void importFileWrongPathRainnyDay() {
-		CsvReader
-		.getInstance()
-		.setPathToFile(WRONG_PATH_TO_CSV)
-		.setCsvSeparator(CSV_SEPARATOR)
-		.build();
+		CsvReader instance = CsvReader.getInstance();
+		instance.setCsvSeparator(CSV_SEPARATOR);
+		instance.setPathToFile(WRONG_PATH_TO_CSV).build();
 	}
 	
 	@Test(expected = DataCorrupetedException.class)
 	public void importFileWithCorruptedData() {
-		CsvReader
-		.getInstance()
-		.setPathToFile(PATH_TO_CSV_CORRUPTED)
-		.setCsvSeparator(CSV_SEPARATOR)
-		.build();
+		CsvReader instance = CsvReader.getInstance();
+		instance.setCsvSeparator(CSV_SEPARATOR);
+		instance.setPathToFile(PATH_TO_CSV_CORRUPTED).build();
 	}
 	
 	@Test(expected = HeaderNotFoundException.class)
 	public void importFileWithoutHeader() {
-		CsvReader
-		.getInstance()
-		.setPathToFile(PATH_TO_CSV_WITHOUT_HEADER)
-		.setCsvSeparator(CSV_SEPARATOR)
-		.build();
+		CsvReader instance = CsvReader.getInstance();
+		instance.setCsvSeparator(CSV_SEPARATOR);
+		instance.setPathToFile(PATH_TO_CSV_WITHOUT_HEADER).build();
 	}
 	
 	@Test
 	public void assertDataFromFile() {
-			CsvReader csvReader = CsvReader
-				.getInstance()
-				.setPathToFile(PATH_TO_CSV)
-				.setCsvSeparator(CSV_SEPARATOR)
-				.build();
+		CsvReader instance = CsvReader.getInstance();
+		instance.setCsvSeparator(CSV_SEPARATOR);
+		instance.setPathToFile(PATH_TO_CSV).build();
 			
-			List<Map<String, String>> listData = csvReader.getData();
-			Assert.assertEquals(5565, listData.size());
+		List<Map<String, String>> listData = instance.getData();
+		Assert.assertEquals(5565, listData.size());
 	}
 	
 	@Test
 	public void assertHeaderFromFile() {
-		CsvReader csvReader = CsvReader
-				.getInstance()
-				.setPathToFile(PATH_TO_CSV)
-				.setCsvSeparator(CSV_SEPARATOR)
-				.build();
+		CsvReader csvReader = CsvReader.getInstance();
+		csvReader.setCsvSeparator(CSV_SEPARATOR);
+		csvReader.setPathToFile(PATH_TO_CSV).build();
 		
 		List<String> header = csvReader.getHeader();
-		Assert.assertEquals(header.size(), 10);
+		Assert.assertEquals(10, header.size());
 	}
 	
 }
