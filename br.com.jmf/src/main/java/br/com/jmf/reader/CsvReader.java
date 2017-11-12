@@ -96,7 +96,7 @@ public class CsvReader implements FileReaderInterface{
 	}
 
 	private void tryReadCsvData() throws IOException {
-		String line;
+		String line; 
 		Integer linePosition = 1;
 		ArrayList<Map<String, String>> listMappedData = new ArrayList<Map<String, String>>();
 		Map<String, String> fieldValue = null;
@@ -124,6 +124,7 @@ public class CsvReader implements FileReaderInterface{
 			dataAtPosition = splitedData[position];
 			fieldValue.put(field, dataAtPosition);
 		}
+		
 		return fieldValue;
 	}
 

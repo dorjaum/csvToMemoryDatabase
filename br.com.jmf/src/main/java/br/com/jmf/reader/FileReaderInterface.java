@@ -5,7 +5,11 @@ import java.util.Map;
 
 public interface FileReaderInterface {
 
-	public CsvReader build();
+	public FileReaderInterface build();
+	
+	public FileReaderInterface setPathToFile(String pathToFile);
+	
+	public FileReaderInterface setCsvSeparator(String separator);
 	
 	public List<String> getHeader();
 	
