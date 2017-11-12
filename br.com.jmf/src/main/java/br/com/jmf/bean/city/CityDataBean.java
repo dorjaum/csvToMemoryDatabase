@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class CityDataBean {
 
+	private long idLine;
 	private Map<String, String> linePropertieValue;
 	
 	public CityDataBean(Map<String, String> propertieValue) {
@@ -20,6 +21,14 @@ public class CityDataBean {
 
 	public String getValue(CityHeaderBean headerBean) {
 		return getLinePropertieValue().get(headerBean.getName());
+	}
+
+	public long getIdLine() {
+		return idLine;
+	}
+
+	public void setIdLine(long idLine) {
+		this.idLine = idLine;
 	}
 	
 

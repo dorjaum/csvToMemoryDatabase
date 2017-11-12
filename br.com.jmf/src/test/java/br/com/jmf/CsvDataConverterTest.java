@@ -40,6 +40,8 @@ public class CsvDataConverterTest {
 		CityHeaderBean ibgeId = citiesHeaderBean.get(0);
 		
 		CityDataBean firstLine = listCitiesDataBean.get(0);
+		Assert.assertEquals(1l, firstLine.getIdLine());
+		
 		String ibgeIDValue = firstLine.getValue(ibgeId);
 		assertEquals("1100015", ibgeIDValue);
 		

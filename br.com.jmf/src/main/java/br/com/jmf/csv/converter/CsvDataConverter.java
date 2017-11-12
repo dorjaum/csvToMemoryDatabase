@@ -61,8 +61,13 @@ public class CsvDataConverter {
 
 	private void fillListCityDataBean() {
 		List<Map<String, String>> listDataMap = getCsvReader().getData();
+		CityDataBean cityDataBean = null;
+		long idLine = 1L;
+		
 		for (Map<String, String> dataMap : listDataMap) {
-			listCityDataBean.add(new CityDataBean(dataMap));
+			cityDataBean = new CityDataBean(dataMap);
+			cityDataBean.setIdLine(idLine++);
+			listCityDataBean.add(cityDataBean);
 		}
 	}
 
