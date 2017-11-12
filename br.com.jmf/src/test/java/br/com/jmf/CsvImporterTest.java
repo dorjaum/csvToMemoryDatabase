@@ -24,35 +24,35 @@ public class CsvImporterTest {
 	public void importDefaultFileSunday() {
 		CsvReader instance = CsvReader.getInstance();
 		instance.setCsvSeparator(CSV_SEPARATOR);
-		instance.setPathToFile(PATH_TO_CSV).build();
+		instance.setPathToFile(PATH_TO_CSV).execute();
 	}
 	
 	@Test(expected = MissingFileException.class)
 	public void importFileWrongPathRainnyDay() {
 		CsvReader instance = CsvReader.getInstance();
 		instance.setCsvSeparator(CSV_SEPARATOR);
-		instance.setPathToFile(WRONG_PATH_TO_CSV).build();
+		instance.setPathToFile(WRONG_PATH_TO_CSV).execute();
 	}
 	
 	@Test(expected = DataCorrupetedException.class)
 	public void importFileWithCorruptedData() {
 		CsvReader instance = CsvReader.getInstance();
 		instance.setCsvSeparator(CSV_SEPARATOR);
-		instance.setPathToFile(PATH_TO_CSV_CORRUPTED).build();
+		instance.setPathToFile(PATH_TO_CSV_CORRUPTED).execute();
 	}
 	
 	@Test(expected = HeaderNotFoundException.class)
 	public void importFileWithoutHeader() {
 		CsvReader instance = CsvReader.getInstance();
 		instance.setCsvSeparator(CSV_SEPARATOR);
-		instance.setPathToFile(PATH_TO_CSV_WITHOUT_HEADER).build();
+		instance.setPathToFile(PATH_TO_CSV_WITHOUT_HEADER).execute();
 	}
 	
 	@Test
 	public void assertDataFromFile() {
 		CsvReader instance = CsvReader.getInstance();
 		instance.setCsvSeparator(CSV_SEPARATOR);
-		instance.setPathToFile(PATH_TO_CSV).build();
+		instance.setPathToFile(PATH_TO_CSV).execute();
 			
 		List<Map<String, String>> listData = instance.getData();
 		Assert.assertEquals(5565, listData.size());
@@ -62,7 +62,7 @@ public class CsvImporterTest {
 	public void assertHeaderFromFile() {
 		CsvReader csvReader = CsvReader.getInstance();
 		csvReader.setCsvSeparator(CSV_SEPARATOR);
-		csvReader.setPathToFile(PATH_TO_CSV).build();
+		csvReader.setPathToFile(PATH_TO_CSV).execute();
 		
 		List<String> header = csvReader.getHeader();
 		Assert.assertEquals(10, header.size());

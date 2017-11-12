@@ -54,7 +54,7 @@ public class CsvReader implements FileReaderInterface{
 		return instance;
 	}
 
-	public CsvReader build() {
+	public CsvReader execute() {
 		cleanHeaderAndData();
 		try {
 			trySetBufferReader();

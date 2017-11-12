@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface FileReaderInterface {
 
-	public FileReaderInterface build();
+	public FileReaderInterface execute();
 	
 	public FileReaderInterface setPathToFile(String pathToFile);
 	

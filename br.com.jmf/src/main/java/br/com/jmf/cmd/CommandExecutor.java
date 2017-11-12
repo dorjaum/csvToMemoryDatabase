@@ -1,11 +1,15 @@
 package br.com.jmf.cmd;
 
-public class CommandExecutor {
+import java.util.ArrayList;
 
+import br.com.jmf.bean.city.CityDataBean;
+import br.com.jmf.database.DatabaseMemory;
+
+public class CommandExecutor {
+	
 	public long count() {
-				
-		
-		return 0;
+		ArrayList<CityDataBean> listCityDataBean = DatabaseMemory.getInstance().getListCityDataBean();
+		return listCityDataBean.size();
 	}
 
 	
