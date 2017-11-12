@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.jmf.csv.converter.CsvDatabaseMemoryBuilder;
+import br.com.jmf.exception.command.CommandNotExistException;
 
 public class CommandExecutorTest {
 
@@ -15,9 +16,17 @@ public class CommandExecutorTest {
 	
 	@Test
 	public void countRegisters() {
-		CommandExecutor commandExecutor = new CommandExecutor();
-		long totalRegisters = commandExecutor.count();
+		CommandFactory commandFactory = new CommandFactory();
+		CommandInterface commandCount = commandFactory.getCommand("count *");
 		
-		Assert.assertEquals(5565, totalRegisters);
+		String totalRegisters = commandCount.getResult();
+		
+		Assert.assertTrue("5565".equals(totalRegisters));
+	}
+	
+	@Test(expected = CommandNotExistException.class)
+	public void commandNotExist() {
+		CommandFactory commandFactory = new CommandFactory();
+		CommandInterface commandCount = commandFactory.getCommand("");
 	}
 }

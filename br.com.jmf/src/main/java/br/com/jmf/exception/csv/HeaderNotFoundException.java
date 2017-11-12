@@ -1,4 +1,4 @@
-package br.com.jmf.csv.exception;
+package br.com.jmf.exception.csv;
 
 public class HeaderNotFoundException extends RuntimeException {
 

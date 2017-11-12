@@ -6,10 +6,10 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.jmf.csv.exception.DataCorrupetedException;
-import br.com.jmf.csv.exception.HeaderNotFoundException;
-import br.com.jmf.csv.exception.MissingFileException;
 import br.com.jmf.csv.type.SeparatorType;
+import br.com.jmf.exception.csv.DataCorrupetedException;
+import br.com.jmf.exception.csv.HeaderNotFoundException;
+import br.com.jmf.exception.csv.MissingFileException;
 import br.com.jmf.reader.csv.CsvReader;
 
 public class CsvImporterTest {

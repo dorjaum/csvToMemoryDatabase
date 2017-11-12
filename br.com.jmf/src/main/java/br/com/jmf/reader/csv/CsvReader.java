@@ -13,10 +13,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.com.jmf.csv.exception.DataCorrupetedException;
-import br.com.jmf.csv.exception.HeaderNotFoundException;
-import br.com.jmf.csv.exception.MissingFileException;
-import br.com.jmf.csv.exception.ReadingFileException;
+import br.com.jmf.exception.csv.DataCorrupetedException;
+import br.com.jmf.exception.csv.HeaderNotFoundException;
+import br.com.jmf.exception.csv.MissingFileException;
+import br.com.jmf.exception.csv.ReadingFileException;
 import br.com.jmf.reader.FileReaderInterface;
 
 public class CsvReader implements FileReaderInterface{
