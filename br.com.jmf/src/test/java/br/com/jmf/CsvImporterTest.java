@@ -1,5 +1,10 @@
 package br.com.jmf;
 
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.jmf.exception.DataCorrupetedException;
@@ -44,15 +49,6 @@ public class CsvImporterTest {
 		.build();
 	}
 	
-	@Test(expected = ReadingFileException.class)
-	public void importFileWithIOProblem() {
-		CsvReader
-		.getInstance()
-		.setPathToFile(PATH_TO_CSV_IO_PROBLEM)
-		.setCsvSeparator(CSV_SEPARATOR)
-		.build();
-	}
-	
 	@Test(expected = HeaderNotFoundException.class)
 	public void importFileWithoutHeader() {
 		CsvReader
@@ -62,6 +58,29 @@ public class CsvImporterTest {
 		.build();
 	}
 	
+	@Test
+	public void assertDataFromFile() {
+			CsvReader csvReader = CsvReader
+				.getInstance()
+				.setPathToFile(PATH_TO_CSV)
+				.setCsvSeparator(CSV_SEPARATOR)
+				.build();
+			
+			List<Map<String, String>> listData = csvReader.getData();
+
+			Assert.assertEquals(5565, listData.size());
+	}
 	
+	@Test
+	public void assertHeaderFromFile() {
+		CsvReader csvReader = CsvReader
+				.getInstance()
+				.setPathToFile(PATH_TO_CSV)
+				.setCsvSeparator(CSV_SEPARATOR)
+				.build();
+		
+		List<String> header = csvReader.getHeader();
+		Assert.assertEquals(header.size(), 10);
+	}
 	
 }

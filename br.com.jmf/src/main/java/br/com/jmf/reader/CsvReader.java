@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
+
 import br.com.jmf.exception.DataCorrupetedException;
 import br.com.jmf.exception.HeaderNotFoundException;
 import br.com.jmf.exception.MissingFileException;
@@ -46,11 +48,15 @@ public class CsvReader implements FileReaderInterface{
 		if (instance == null) {
 			instance = new CsvReader();
 		}
-
+		instance.cleanHeaderAndData();
+		instance.setPathToFile("");
+		instance.setCsvSeparator("");
+		
 		return instance;
 	}
 
 	public CsvReader build() {
+		cleanHeaderAndData();
 		try {
 			trySetBufferReader();
 			tryReadCsvHeader();
@@ -66,6 +72,11 @@ public class CsvReader implements FileReaderInterface{
 		}
 
 		return this;
+	}
+
+	private void cleanHeaderAndData() {
+		instance.setData(new ArrayList<Map<String,String>>());
+		instance.setHeader(new ArrayList<String>());
 	}
 
 	private void trySetBufferReader() throws FileNotFoundException {
