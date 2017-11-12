@@ -6,12 +6,13 @@ import java.util.Map;
 
 import br.com.jmf.bean.city.CityDataBean;
 import br.com.jmf.bean.city.CityHeaderBean;
+import br.com.jmf.csv.type.SeparatorType;
 import br.com.jmf.reader.FileReaderInterface;
 import br.com.jmf.reader.csv.CsvReader;
 
 public class CsvDataConverter {
 
-	private static final String SEPARATOR = ",";
+	private static final String SEPARATOR = SeparatorType.COMMA.getSeparator();
 	private static final String PATH_TO_CSV_FILE = "src/test/resources/files/cities_data.csv";
 	
 	private FileReaderInterface csvReader = CsvReader.getInstance();
@@ -22,7 +23,14 @@ public class CsvDataConverter {
 		setListCityHeaderBean(new ArrayList<CityHeaderBean>());
 		setListCityDataBean(new ArrayList<CityDataBean>());
 		((CsvReader) getCsvReader()).setCsvSeparator(SEPARATOR);
-		 getCsvReader().setPathToFile(PATH_TO_CSV_FILE).build();
+		getCsvReader().setPathToFile(PATH_TO_CSV_FILE).build();
+	}
+	
+	public CsvDataConverter(String pathToFile, SeparatorType separator) {
+		getCsvReader().setPathToFile(pathToFile);
+		((CsvReader) getCsvReader()).setCsvSeparator(separator.getSeparator());
+		setListCityHeaderBean(new ArrayList<CityHeaderBean>());
+		setListCityDataBean(new ArrayList<CityDataBean>());
 	}
 
 	public FileReaderInterface getCsvReader() {

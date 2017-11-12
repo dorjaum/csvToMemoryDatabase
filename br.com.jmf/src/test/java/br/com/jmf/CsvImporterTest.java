@@ -9,6 +9,7 @@ import org.junit.Test;
 import br.com.jmf.csv.exception.DataCorrupetedException;
 import br.com.jmf.csv.exception.HeaderNotFoundException;
 import br.com.jmf.csv.exception.MissingFileException;
+import br.com.jmf.csv.type.SeparatorType;
 import br.com.jmf.reader.csv.CsvReader;
 
 public class CsvImporterTest {
@@ -17,7 +18,7 @@ public class CsvImporterTest {
 	private static final String PATH_TO_CSV_WITHOUT_HEADER = "src/test/resources/files/cities_data_without_header.csv";
 	private static final String PATH_TO_CSV_CORRUPTED = "src/test/resources/files/cities_data_corrupted.csv";
 	private static final String WRONG_PATH_TO_CSV = "src__/test/resources/files/cities_data.csv";
-	private static final String CSV_SEPARATOR = ",";
+	private static final String CSV_SEPARATOR = SeparatorType.COMMA.getSeparator();
 	
 	@Test
 	public void importDefaultFileSunday() {
