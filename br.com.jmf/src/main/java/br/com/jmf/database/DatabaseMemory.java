@@ -12,7 +12,7 @@ public class DatabaseMemory {
 	private DatabaseMemory() {
 	}
 
-	public static DatabaseMemory getInstance() {
+	public static synchronized DatabaseMemory getInstance() {
 		if(instance == null) {
 			instance = new DatabaseMemory();
 		}

@@ -1,4 +1,4 @@
-package br.com.jmf;
+package br.com.jmf.csv;
 
 import java.util.List;
 import java.util.Map;

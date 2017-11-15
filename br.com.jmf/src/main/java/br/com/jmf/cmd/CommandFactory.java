@@ -3,23 +3,27 @@ package br.com.jmf.cmd;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.jmf.bean.city.CityHeaderBean;
 import br.com.jmf.cmd.property.Property;
 import br.com.jmf.cmd.property.Value;
 import br.com.jmf.cmd.type.CommandCount;
 import br.com.jmf.cmd.type.CommandDistinct;
 import br.com.jmf.cmd.type.CommandFilter;
+import br.com.jmf.cmd.type.CommandInterface;
+import br.com.jmf.database.DatabaseMemory;
 import br.com.jmf.exception.command.CommandNotExistException;
 import br.com.jmf.exception.command.PropertyException;
 import br.com.jmf.exception.command.ValueException;
 
 public class CommandFactory {
 	
+	private static final String MSG_PROPERTY_NOT_EXISTS = "Property not exists.";
 	private static final String MSG_VALUE_MUST_BE_NOT_BLANK = "Value must be not blank.";
 	private static final String MSG_PROPERTY_MUST_BE_NOT_BLANK = "Property must be not blank.";
 	private static final String MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY = "Enter a command that is not empty";
 
 	public CommandInterface getCommand(String commandInput) {
-		if(commandInput == null || commandInput.trim().equals("")) {
+		if(isBlank(commandInput)) {
 			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
 		}
 		
@@ -39,17 +43,24 @@ public class CommandFactory {
 		
 		return null;
 	}
-	
+
 	public Property getProperty(String property) {
-		if(property == null || property.trim().equals("")) {
+		if(isBlank(property)) {
 			throw new PropertyException(MSG_PROPERTY_MUST_BE_NOT_BLANK);
 		}
 		
-		return new Property(property);
+		ArrayList<CityHeaderBean> listCityHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
+		for (CityHeaderBean cityHeaderBean : listCityHeaderBean) {
+			if(cityHeaderBean.getName().equals(property)) {
+				return new Property(property);
+			}
+		}
+		
+		throw new PropertyException(MSG_PROPERTY_NOT_EXISTS);		
 	}
 
 	public Value getValue(String value) {
-		if(value == null || value.trim().equals("")) {
+		if(isBlank(value)) {
 			throw new ValueException(MSG_VALUE_MUST_BE_NOT_BLANK);
 		}
 		
@@ -70,7 +81,11 @@ public class CommandFactory {
 	}
 
 	private boolean isNotBlank(String possibleCommand) {
-		return possibleCommand != null || possibleCommand.trim() != ""; 
+		return !isBlank(possibleCommand); 
+	}
+	
+	private boolean isBlank(String commandInput) {
+		return commandInput == null || commandInput.trim().equals("");
 	}
 	
 }

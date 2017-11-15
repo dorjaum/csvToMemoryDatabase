@@ -1,4 +1,4 @@
-package br.com.jmf.cmd;
+package br.com.jmf.cmd.type;
 
 public interface CommandInterface {
 

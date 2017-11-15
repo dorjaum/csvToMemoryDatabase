@@ -9,6 +9,7 @@ import br.com.jmf.cmd.property.Value;
 import br.com.jmf.cmd.type.CommandCount;
 import br.com.jmf.cmd.type.CommandDistinct;
 import br.com.jmf.cmd.type.CommandFilter;
+import br.com.jmf.cmd.type.CommandInterface;
 import br.com.jmf.csv.converter.CsvDatabaseMemoryBuilder;
 import br.com.jmf.exception.command.CommandNotExistException;
 import br.com.jmf.exception.command.PropertyException;
@@ -20,7 +21,7 @@ public class CommandExecutorTest {
 	
 	@Before
 	public void prepareDatabaseMemory() {
-		CsvDatabaseMemoryBuilder.build();
+		CsvDatabaseMemoryBuilder.execute();
 		commandFactory = new CommandFactory();
 	}
 	
@@ -49,13 +50,23 @@ public class CommandExecutorTest {
 	
 	@Test(expected = PropertyException.class)
 	public void generateEmptyProperty() {
-		Property property = commandFactory.getProperty("");
+		commandFactory.getProperty("");
+	}
+	
+	@Test
+	public void generateProperty() {
+		Property property = commandFactory.getProperty("ibge_id");
 		Assert.assertTrue(property instanceof Property);
 	}
 	
 	@Test(expected = ValueException.class)
 	public void generateEmptyValue() {
-		Value value = commandFactory.getValue("");
+		commandFactory.getValue("");
+	}
+	
+	@Test
+	public void generateValue() {
+		Value value = commandFactory.getValue("123345");
 		Assert.assertTrue(value instanceof Value);
 	}
 }

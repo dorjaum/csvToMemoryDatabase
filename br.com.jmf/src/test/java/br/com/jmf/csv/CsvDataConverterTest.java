@@ -1,4 +1,4 @@
-package br.com.jmf;
+package br.com.jmf.csv;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +17,7 @@ public class CsvDataConverterTest {
 	
 	@Before
 	public void initializeDatabaseMemory() {
-		CsvDatabaseMemoryBuilder.build();
+		CsvDatabaseMemoryBuilder.execute();
 	}
 	
 	@Test

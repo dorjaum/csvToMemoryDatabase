@@ -28,7 +28,7 @@ public class CsvDatabaseMemoryBuilder {
 		fillListCityDataBean();
 	}
 	
-	public static void build() {
+	public static void execute() {
 		csvReader.setPathToFile(PATH_TO_CSV_FILE);
 		((CsvReader) csvReader).setCsvSeparator(SEPARATOR);
 		csvReader.execute();
