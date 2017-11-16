@@ -12,7 +12,6 @@ public class CommandFilterTest extends EnvironmentPreparationTest{
 
 	private static final String CMD_FILTER = "filter";
 	private static final String PROP_UF = "uf";
-	private static final String VAL_RO = "RO";
 	private static final String VAL_DF = "DF";
 
 	@Test(expected = CommandFilterException.class)
@@ -33,7 +32,7 @@ public class CommandFilterTest extends EnvironmentPreparationTest{
 	}
 	
 	@Test
-	public void filterWithPropertyUfEqualsRo() {
+	public void filterWithPropertyUfEqualsDF() {
 		ArrayList<String> listCommand = new ArrayList<String>();
 		listCommand.add(CMD_FILTER);
 		listCommand.add(PROP_UF);
@@ -41,8 +40,9 @@ public class CommandFilterTest extends EnvironmentPreparationTest{
 		CommandInterface command = CommandFactory.getCommand(listCommand);
 		
 		StringBuilder resultAsJson = new StringBuilder();
-		resultAsJson.append(" [ibge_id:5300108, uf:df, capital:Brasília, capital:true, lon:-47.887905478, ");
-		resultAsJson.append("lat:-15.7940873619 ,no_accents:Brasilia ,alternative_names: ,microregion:Brasília ,mesoregion:Distrito Federal]");
+		resultAsJson.append("[ line: 5565, microregion:Brasília, uf:DF, capital:true, no_accents:Brasilia, ");
+		resultAsJson.append("ibge_id:5300108, name:Brasília, lon:-47.887905478, alternative_names:, lat:-15.7940873619, ");
+		resultAsJson.append("mesoregion:Distrito Federal ]\n"); 
 		
 		Assert.assertEquals(resultAsJson.toString(), command.getResult());
 	}

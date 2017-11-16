@@ -1,6 +1,11 @@
 package br.com.jmf.bean.city;
 
+import java.util.Collection;
 import java.util.Map;
+
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import jdk.nashorn.internal.parser.JSONParser;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 
 public class CityDataBean {
 
@@ -29,6 +34,28 @@ public class CityDataBean {
 
 	public void setIdLine(long idLine) {
 		this.idLine = idLine;
+	}
+
+	public String asJson() {
+		StringBuilder jsonBuilder = new StringBuilder();
+		jsonBuilder.append("[ ");
+		jsonBuilder.append("line: " );
+		jsonBuilder.append(getIdLine());
+		jsonBuilder.append(", ");
+		for (String key : getLinePropertieValue().keySet()) {
+			jsonBuilder.append(key);
+			jsonBuilder.append(":");
+			jsonBuilder.append(getLinePropertieValue().get(key));
+			jsonBuilder.append(", ");
+		}
+		jsonBuilder = eraseLastComma(jsonBuilder);
+		jsonBuilder.append(" ]");
+		
+		return jsonBuilder.toString();
+	}
+
+	private StringBuilder eraseLastComma(StringBuilder jsonBuilder) {
+		return jsonBuilder.replace(jsonBuilder.length() -2, jsonBuilder.length(), "");
 	}
 	
 

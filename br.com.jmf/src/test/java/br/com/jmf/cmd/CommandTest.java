@@ -23,12 +23,17 @@ import br.com.jmf.exception.command.ValueException;
 
 public class CommandTest extends EnvironmentPreparationTest {
 
+	private static final String CMD_FILTER = "filter";
+	private static final String VALUE_12345 = "12345";
+	private static final String PROP_IBGE_ID = "ibge_id";
+
 	@Test
 	public void countInstance() {
-		ArrayList<String> subCommand = new ArrayList<String>();
-		subCommand.add(CommandAsterisk.CMD_ASTERISK);
+		ArrayList<String> listCommand = new ArrayList<String>();
+		listCommand.add(CommandCount.CMD_COUNT);
+		listCommand.add(CommandAsterisk.CMD_ASTERISK);
 
-		CommandInterface commandCount = getCommand("count", subCommand);
+		CommandInterface commandCount = getCommand(listCommand);
 		Assert.assertTrue(commandCount instanceof CommandCount);
 	}
 
@@ -44,7 +49,10 @@ public class CommandTest extends EnvironmentPreparationTest {
 
 	@Test
 	public void commandFilter() {
-		CommandInterface filter = getCommand("filter", new ArrayList<String>());
+		ArrayList<String> subCommand = new ArrayList<String>();
+		subCommand.add(PROP_IBGE_ID);
+		subCommand.add(VALUE_12345);
+		CommandInterface filter = getCommand(CMD_FILTER, subCommand);
 		Assert.assertTrue(filter instanceof CommandFilter);
 	}
 
@@ -55,7 +63,7 @@ public class CommandTest extends EnvironmentPreparationTest {
 
 	@Test
 	public void generateProperty() {
-		PropertyInterface property = getProperty("ibge_id", "");
+		PropertyInterface property = getProperty(PROP_IBGE_ID, "");
 		Assert.assertTrue(property instanceof Property);
 	}
 
@@ -66,7 +74,7 @@ public class CommandTest extends EnvironmentPreparationTest {
 
 	@Test
 	public void generateValue() {
-		ValueInterface value = getValue("123345");
+		ValueInterface value = getValue(VALUE_12345);
 		Assert.assertTrue(value instanceof Value);
 	}
 }
