@@ -41,10 +41,7 @@ public class CommandFactory {
 	
 	
 	public static CommandInterface getCommand(String command, List<String> subCommands) {
-		if(isBlank(command)) {
-			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
-		}
-		
+		validateCommand(command);
 		String inputUpper = command.toLowerCase();
 		
 		if(inputUpper.equals(CommandCount.CMD_COUNT)) {
@@ -59,9 +56,7 @@ public class CommandFactory {
 	}
 
 	public static PropertyInterface getProperty(String property, String value) {
-		if(isBlank(property)) {
-			throw new PropertyException(MSG_PROPERTY_MUST_BE_NOT_BLANK);
-		}
+		validateProperty(property);
 		
 		ArrayList<CityHeaderBean> listCityHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
 		for (CityHeaderBean cityHeaderBean : listCityHeaderBean) {
@@ -82,9 +77,7 @@ public class CommandFactory {
 	}
 	
 	public static SubCommandInterface getSubCommand(String subCommand, List<String> subList) {
-		if(isBlank(subCommand)) {
-			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
-		}
+		validateCommand(subCommand);
 		
 		String subCommandUpper = subCommand.toLowerCase();
 		
@@ -98,5 +91,18 @@ public class CommandFactory {
 		
 		return null;
 	}
+
+	private static void validateProperty(String property) {
+		if(isBlank(property)) {
+			throw new PropertyException(MSG_PROPERTY_MUST_BE_NOT_BLANK);
+		}
+	}
+
+	private static void validateCommand(String command) {
+		if(isBlank(command)) {
+			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
+		}
+	}
+
 
 }
