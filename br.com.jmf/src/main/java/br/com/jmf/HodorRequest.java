@@ -2,38 +2,20 @@ package br.com.jmf;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import br.com.jmf.bean.city.CityDataBean;
+import br.com.jmf.cmd.CommandFactory;
+import br.com.jmf.cmd.type.CommandInterface;
 import br.com.jmf.csv.converter.CsvDatabaseMemoryBuilder;
-import br.com.jmf.reader.csv.CsvReader;
+import br.com.jmf.utils.StringUtils;
 
 public class HodorRequest {
 	
-	private List<CityDataBean> result = new ArrayList<CityDataBean>();
+	private String result = "";
 	private static HodorRequest hodorRequest;
-	private static Logger LOGGER = Logger.getLogger(HodorRequest.class.getName());
+	private CommandInterface command;
 	
-	public static void main(String[] args) {
-		HodorRequest instance = HodorRequest.getInstance();
-		Scanner input = new Scanner(System.in);
-		printInstructions();
-		String request = "";
-		while(true) {
-			LOGGER.log(Level.INFO, "WAITING FOR COMMAND > ");
-			request = input.nextLine();
-
-			if(request.toUpperCase().equals("EXIT")) {
-				LOGGER.log(Level.INFO, " ** PROGRAM HAS BEEN STOPED BY THE USER ** ");
-				break;
-			}
-			
-			instance.execute(request);
-		}
-	}
-
+	
 	public static HodorRequest getInstance() {
 		if(hodorRequest == null) {
 			hodorRequest = new HodorRequest();
@@ -47,21 +29,35 @@ public class HodorRequest {
 	}
 	
 	public void execute(String request) {
-		
+		List<String> commandList = getCommandList(request);
+		//se commandList tem um comando soh, stoura excessao.
+		setCommand(CommandFactory.getCommand(commandList.get(0), commandList.subList(1, commandList.size())));
+		setResult(command.getResult());
 	}
 
-	public List<CityDataBean> getResult() {
+	private void setCommand(CommandInterface command) {
+		this.command = command;
+	}
+
+	private void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getResult() {
 		return result;
 	}
-
-	private static void printInstructions() {
-		System.out.println(" ### TYPE EXIT TO STOP EXECUTION ### ");
-		System.out.println(" ### ACTUAL VALID COMMANDS EX:   ### ");
-		System.out.println(" > count * ");
-		System.out.println(" > count distinct [property] ");
-		System.out.println(" > filter [property] [value]");
-		System.out.println(" ");
-		System.out.println(" ### NOT CASE SENSITIVE, ENJOY ;) ### ");
+	
+	private List<String> getCommandList(String commandInput) {
+		String commandUpper = commandInput.toLowerCase();
+		String[] possibleCommandList = commandUpper.split(" ");
+		ArrayList<String> notBlankWords = new ArrayList<String>();
+		for (String possibleCommand : possibleCommandList) {
+			if(StringUtils.isNotBlank(possibleCommand)){
+				notBlankWords.add(possibleCommand);
+			}
+		}
+		
+		return notBlankWords;
 	}
 	
 }

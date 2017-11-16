@@ -1,6 +1,6 @@
 package br.com.jmf.cmd.property;
 
-public class Value {
+public class Value implements ValueInterface{
 
 	private String value;
 	

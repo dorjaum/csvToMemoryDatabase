@@ -1,13 +1,19 @@
 package br.com.jmf.cmd;
 
+import static br.com.jmf.utils.StringUtils.isBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jmf.bean.city.CityHeaderBean;
 import br.com.jmf.cmd.property.Property;
+import br.com.jmf.cmd.property.PropertyInterface;
 import br.com.jmf.cmd.property.Value;
+import br.com.jmf.cmd.property.ValueInterface;
+import br.com.jmf.cmd.sub.CommandAsterisk;
+import br.com.jmf.cmd.sub.CommandDistinct;
+import br.com.jmf.cmd.sub.SubCommandInterface;
 import br.com.jmf.cmd.type.CommandCount;
-import br.com.jmf.cmd.type.CommandDistinct;
 import br.com.jmf.cmd.type.CommandFilter;
 import br.com.jmf.cmd.type.CommandInterface;
 import br.com.jmf.database.DatabaseMemory;
@@ -22,29 +28,25 @@ public class CommandFactory {
 	private static final String MSG_PROPERTY_MUST_BE_NOT_BLANK = "Property must be not blank.";
 	private static final String MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY = "Enter a command that is not empty";
 
-	public CommandInterface getCommand(String commandInput) {
-		if(isBlank(commandInput)) {
+	public static CommandInterface getCommand(String command, List<String> subCommands) {
+		if(isBlank(command)) {
 			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
 		}
 		
-		String inputUpper = commandInput.toUpperCase();
+		String inputUpper = command.toLowerCase();
 		
 		if(inputUpper.equals(CommandCount.CMD_COUNT)) {
-			return new CommandCount();
-		}
-		
-		if(inputUpper.equals(CommandDistinct.CMD_DISTINCT)) {
-			return new CommandDistinct();
+			return new CommandCount(subCommands);
 		}
 		
 		if(inputUpper.equals(CommandFilter.CMD_FILTER)) {
-			return new CommandFilter();
+			return new CommandFilter(subCommands);
 		}
 		
 		return null;
 	}
 
-	public Property getProperty(String property) {
+	public static PropertyInterface getProperty(String property, String value) {
 		if(isBlank(property)) {
 			throw new PropertyException(MSG_PROPERTY_MUST_BE_NOT_BLANK);
 		}
@@ -52,14 +54,14 @@ public class CommandFactory {
 		ArrayList<CityHeaderBean> listCityHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
 		for (CityHeaderBean cityHeaderBean : listCityHeaderBean) {
 			if(cityHeaderBean.getName().equals(property)) {
-				return new Property(property);
+				return new Property(property, value);
 			}
 		}
 		
 		throw new PropertyException(MSG_PROPERTY_NOT_EXISTS);		
 	}
 
-	public Value getValue(String value) {
+	public static ValueInterface getValue(String value) {
 		if(isBlank(value)) {
 			throw new ValueException(MSG_VALUE_MUST_BE_NOT_BLANK);
 		}
@@ -67,25 +69,22 @@ public class CommandFactory {
 		return new Value(value);
 	}
 	
-	private List<String> getCommandList(String commandInput) {
-		String commandUpper = commandInput.toUpperCase();
-		String[] possibleCommandList = commandUpper.split(" ");
-		ArrayList<String> notBlankWords = new ArrayList<String>();
-		for (String possibleCommand : possibleCommandList) {
-			if(isNotBlank(possibleCommand)){
-				notBlankWords.add(possibleCommand);
-			}
+	public static SubCommandInterface getSubCommand(String subCommand, List<String> subList) {
+		if(isBlank(subCommand)) {
+			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
 		}
 		
-		return notBlankWords;
-	}
-
-	private boolean isNotBlank(String possibleCommand) {
-		return !isBlank(possibleCommand); 
-	}
-	
-	private boolean isBlank(String commandInput) {
-		return commandInput == null || commandInput.trim().equals("");
+		String subCommandUpper = subCommand.toLowerCase();
+		
+		if(subCommandUpper.equals(CommandDistinct.CMD_DISTINCT)) {
+			return new CommandDistinct(subList);
+		}
+		
+		if(subCommandUpper.equals(CommandAsterisk.CMD_ASTERISK)){
+			return new CommandAsterisk();
+		}
+		
+		return null;
 	}
 	
 }
