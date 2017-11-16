@@ -15,13 +15,19 @@ public class Hodor {
 		while(true) {
 			LOGGER.log(Level.INFO, "WAITING FOR COMMAND > ");
 			request = input.nextLine();
-
 			if(request.toLowerCase().equals("exit")) {
 				LOGGER.log(Level.INFO, " ** PROGRAM HAS BEEN STOPED BY THE USER ** ");
 				break;
 			}
 			
+			tryExecuteCommand(instance, request);
+		}
+	}
+	private static void tryExecuteCommand(HodorRequest instance, String request) {
+		try {
 			instance.execute(request);
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, e.getMessage());
 		}
 	}
 	private static void printInstructions() {

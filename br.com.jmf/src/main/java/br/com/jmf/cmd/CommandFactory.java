@@ -27,7 +27,19 @@ public class CommandFactory {
 	private static final String MSG_VALUE_MUST_BE_NOT_BLANK = "Value must be not blank.";
 	private static final String MSG_PROPERTY_MUST_BE_NOT_BLANK = "Property must be not blank.";
 	private static final String MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY = "Enter a command that is not empty";
+	private static final String MSG_COMMAND_PROVIDED_NOT_EXPECTED = "Command provided not expected.";
 
+	public static CommandInterface getCommand(List<String> commandList) {
+		List<String> subListOfCommands = commandList.subList(1, commandList.size());
+		CommandInterface command = getCommand(commandList.get(0), subListOfCommands);
+		if(command == null) {
+			throw new CommandNotExistException(MSG_COMMAND_PROVIDED_NOT_EXPECTED);
+		}
+		
+		return command;
+	}
+	
+	
 	public static CommandInterface getCommand(String command, List<String> subCommands) {
 		if(isBlank(command)) {
 			throw new CommandNotExistException(MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY);
@@ -86,5 +98,5 @@ public class CommandFactory {
 		
 		return null;
 	}
-	
+
 }

@@ -2,11 +2,14 @@ package br.com.jmf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import br.com.jmf.bean.city.CityDataBean;
 import br.com.jmf.cmd.CommandFactory;
 import br.com.jmf.cmd.type.CommandInterface;
 import br.com.jmf.csv.converter.CsvDatabaseMemoryBuilder;
+import br.com.jmf.exception.command.CommandNotExistException;
 import br.com.jmf.utils.StringUtils;
 
 public class HodorRequest {
@@ -14,7 +17,7 @@ public class HodorRequest {
 	private String result = "";
 	private static HodorRequest hodorRequest;
 	private CommandInterface command;
-	
+	private static Logger LOGGER = Logger.getLogger(Hodor.class.getName());
 	
 	public static HodorRequest getInstance() {
 		if(hodorRequest == null) {
@@ -28,11 +31,21 @@ public class HodorRequest {
 		CsvDatabaseMemoryBuilder.execute();
 	}
 	
-	public void execute(String request) {
+	public HodorRequest execute(String request) {
 		List<String> commandList = getCommandList(request);
-		//se commandList tem um comando soh, stoura excessao.
-		setCommand(CommandFactory.getCommand(commandList.get(0), commandList.subList(1, commandList.size())));
-		setResult(command.getResult());
+		setCommand(CommandFactory.getCommand(commandList));
+		setResult(getCommand().getResult());
+		printResult();
+		
+		return this;
+	}
+
+	private CommandInterface getCommand() {
+		return command;
+	}
+
+	private void printResult() {
+		System.out.println(getResult());
 	}
 
 	private void setCommand(CommandInterface command) {
