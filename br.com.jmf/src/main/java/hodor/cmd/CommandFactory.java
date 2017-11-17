@@ -5,7 +5,7 @@ import static hodor.utils.StringUtils.isBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-import hodor.bean.city.CityHeaderBean;
+import hodor.bean.city.HeaderBean;
 import hodor.cmd.property.Property;
 import hodor.cmd.property.PropertyInterface;
 import hodor.cmd.property.Value;
@@ -28,17 +28,13 @@ public class CommandFactory {
 	private static final String MSG_PROPERTY_MUST_BE_NOT_BLANK = "Property must be not blank.";
 	private static final String MSG_ENTER_A_COMMAND_THAT_IS_NOT_EMPTY = "Enter a command that is not empty";
 	private static final String MSG_COMMAND_PROVIDED_NOT_EXPECTED = "Command provided not expected.";
+	private static final String MSG_PLEASE_PROVIDE_A_VALID_SUBCOMMAND = "Please provide valid subcommand.";
 
 	public static CommandInterface getCommand(List<String> commandList) {
 		List<String> subListOfCommands = commandList.subList(1, commandList.size());
-		CommandInterface command = getCommand(commandList.get(0), subListOfCommands);
-		if(command == null) {
-			throw new CommandNotExistException(MSG_COMMAND_PROVIDED_NOT_EXPECTED);
-		}
-		
-		return command;
+
+		return getCommand(commandList.get(0), subListOfCommands);
 	}
-	
 	
 	public static CommandInterface getCommand(String command, List<String> subCommands) {
 		validateCommand(command);
@@ -52,14 +48,15 @@ public class CommandFactory {
 			return new CommandFilter(subCommands);
 		}
 		
-		return null;
+		throw new CommandNotExistException(MSG_COMMAND_PROVIDED_NOT_EXPECTED);
+		
 	}
 
 	public static PropertyInterface getProperty(String property, String value) {
 		validateProperty(property);
 		
-		ArrayList<CityHeaderBean> listCityHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
-		for (CityHeaderBean cityHeaderBean : listCityHeaderBean) {
+		ArrayList<HeaderBean> listCityHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
+		for (HeaderBean cityHeaderBean : listCityHeaderBean) {
 			if(cityHeaderBean.getName().equals(property)) {
 				return new Property(property, value);
 			}
@@ -89,9 +86,10 @@ public class CommandFactory {
 			return new CommandAsterisk();
 		}
 		
-		return null;
+		
+		throw new CommandNotExistException(MSG_PLEASE_PROVIDE_A_VALID_SUBCOMMAND);
 	}
-
+	
 	private static void validateProperty(String property) {
 		if(isBlank(property)) {
 			throw new PropertyException(MSG_PROPERTY_MUST_BE_NOT_BLANK);

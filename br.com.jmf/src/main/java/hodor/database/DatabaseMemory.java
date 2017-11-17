@@ -2,8 +2,8 @@ package hodor.database;
 
 import java.util.ArrayList;
 
-import hodor.bean.city.CityDataBean;
-import hodor.bean.city.CityHeaderBean;
+import hodor.bean.city.DataBean;
+import hodor.bean.city.HeaderBean;
 
 public class DatabaseMemory {
 
@@ -20,22 +20,22 @@ public class DatabaseMemory {
 		return instance;
 	}
 
-	private ArrayList<CityHeaderBean> listCityHeaderBean;
-	private ArrayList<CityDataBean> listCityDataBean;
+	private ArrayList<HeaderBean> listCityHeaderBean;
+	private ArrayList<DataBean> listCityDataBean;
 
-	public ArrayList<CityHeaderBean> getListCityHeaderBean() {
+	public ArrayList<HeaderBean> getListCityHeaderBean() {
 		return listCityHeaderBean;
 	}
 
-	public void setListCityHeaderBean(ArrayList<CityHeaderBean> listCityHeaderBean) {
+	public void setListCityHeaderBean(ArrayList<HeaderBean> listCityHeaderBean) {
 		this.listCityHeaderBean = listCityHeaderBean;
 	}
 
-	public ArrayList<CityDataBean> getListCityDataBean() {
+	public ArrayList<DataBean> getListCityDataBean() {
 		return listCityDataBean;
 	}
 
-	public void setListCityDataBean(ArrayList<CityDataBean> listCityDataBean) {
+	public void setListCityDataBean(ArrayList<DataBean> listCityDataBean) {
 		this.listCityDataBean = listCityDataBean;
 	}
 }

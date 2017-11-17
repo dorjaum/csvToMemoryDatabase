@@ -1,10 +1,10 @@
 package hodor.bean.city;
 
-public class CityHeaderBean {
+public class HeaderBean {
 
 	private String name;
 
-	public CityHeaderBean(String name) {
+	public HeaderBean(String name) {
 		this.name = name;
 	}
 	

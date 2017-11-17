@@ -1,6 +1,8 @@
 package hodor.exception.csv;
 
-public class ReadingFileException extends RuntimeException {
+import hodor.exception.HodorException;
+
+public class ReadingFileException extends HodorException {
 
 	private static final long serialVersionUID = 123587734574969594L;
 	

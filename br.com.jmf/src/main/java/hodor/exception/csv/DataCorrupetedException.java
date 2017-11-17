@@ -1,6 +1,8 @@
 package hodor.exception.csv;
 
-public class DataCorrupetedException extends RuntimeException {
+import hodor.exception.HodorException;
+
+public class DataCorrupetedException extends HodorException {
 
 	private static final long serialVersionUID = 1238773404574969594L;
 	

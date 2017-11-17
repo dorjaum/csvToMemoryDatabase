@@ -1,6 +1,8 @@
 package hodor.exception.command;
 
-public class CommandFilterException extends RuntimeException {
+import hodor.exception.HodorException;
+
+public class CommandFilterException extends HodorException {
 
 	private static final long serialVersionUID = 123823305578909594L;
 	

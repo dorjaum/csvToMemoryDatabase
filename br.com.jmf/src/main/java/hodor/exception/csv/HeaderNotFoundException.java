@@ -1,6 +1,8 @@
 package hodor.exception.csv;
 
-public class HeaderNotFoundException extends RuntimeException {
+import hodor.exception.HodorException;
+
+public class HeaderNotFoundException extends HodorException {
 
 	private static final long serialVersionUID = -4629346402196769170L;
 

@@ -1,6 +1,8 @@
 package hodor.exception.command;
 
-public class PropertyException extends RuntimeException {
+import hodor.exception.HodorException;
+
+public class PropertyException extends HodorException {
 
 	private static final long serialVersionUID = 868497600965670732L;
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hodor.bean.city.CityDataBean;
-import hodor.bean.city.CityHeaderBean;
+import hodor.bean.city.DataBean;
+import hodor.bean.city.HeaderBean;
 import hodor.csv.type.SeparatorType;
 import hodor.database.DatabaseMemory;
 import hodor.reader.FileReaderInterface;
@@ -38,9 +38,9 @@ public class CsvDatabaseMemoryBuilder {
 
 	private static void fillListCityHeaderBean() {
 		List<String> listHeader = csvReader.getHeader();
-		ArrayList<CityHeaderBean> listCityHeaderBean = new ArrayList<CityHeaderBean>();
+		ArrayList<HeaderBean> listCityHeaderBean = new ArrayList<HeaderBean>();
 		for (String headerName : listHeader) {
-			listCityHeaderBean.add(new CityHeaderBean(headerName));
+			listCityHeaderBean.add(new HeaderBean(headerName));
 		}
 		
 		DatabaseMemory.getInstance().setListCityHeaderBean(listCityHeaderBean);
@@ -48,12 +48,12 @@ public class CsvDatabaseMemoryBuilder {
 
 	private static void fillListCityDataBean() {
 		List<Map<String, String>> listDataMap = csvReader.getData();
-		CityDataBean cityDataBean = null;
+		DataBean cityDataBean = null;
 		long idLine = 1L;
-		ArrayList<CityDataBean> listCityDataBean = new ArrayList<CityDataBean>();
+		ArrayList<DataBean> listCityDataBean = new ArrayList<DataBean>();
 		
 		for (Map<String, String> dataMap : listDataMap) {
-			cityDataBean = new CityDataBean(dataMap);
+			cityDataBean = new DataBean(dataMap);
 			cityDataBean.setIdLine(idLine++);
 			listCityDataBean.add(cityDataBean);
 		}

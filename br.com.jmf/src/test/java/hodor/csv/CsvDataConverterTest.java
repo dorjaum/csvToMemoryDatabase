@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import hodor.bean.city.CityDataBean;
-import hodor.bean.city.CityHeaderBean;
+import hodor.bean.city.DataBean;
+import hodor.bean.city.HeaderBean;
 import hodor.csv.converter.CsvDatabaseMemoryBuilder;
 import hodor.database.DatabaseMemory;
 
@@ -22,66 +22,66 @@ public class CsvDataConverterTest {
 	
 	@Test
 	public void convertListHeaderToObject() {
-		List<CityHeaderBean> listCityBean = DatabaseMemory.getInstance().getListCityHeaderBean();
+		List<HeaderBean> listCityBean = DatabaseMemory.getInstance().getListCityHeaderBean();
 		
 		Assert.assertEquals(10, listCityBean.size());
 	}
 	
 	@Test
 	public void convertListDataToObject() {
-		List<CityDataBean> listCitiesDataBean = DatabaseMemory.getInstance().getListCityDataBean();
+		List<DataBean> listCitiesDataBean = DatabaseMemory.getInstance().getListCityDataBean();
 		
 		assertEquals(5565, listCitiesDataBean.size());
 	}
 	
 	@Test
 	public void convertListDataToObjectAssertFirstLineValues() {
-		List<CityDataBean> listCitiesDataBean = DatabaseMemory.getInstance().getListCityDataBean();
+		List<DataBean> listCitiesDataBean = DatabaseMemory.getInstance().getListCityDataBean();
 		
 		Assert.assertEquals(5565, listCitiesDataBean.size());
 		
-		List<CityHeaderBean> citiesHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
-		CityHeaderBean ibgeId = citiesHeaderBean.get(0);
+		List<HeaderBean> citiesHeaderBean = DatabaseMemory.getInstance().getListCityHeaderBean();
+		HeaderBean ibgeId = citiesHeaderBean.get(0);
 		
-		CityDataBean firstLine = listCitiesDataBean.get(0);
+		DataBean firstLine = listCitiesDataBean.get(0);
 		Assert.assertEquals(1l, firstLine.getIdLine());
 		
 		String ibgeIDValue = firstLine.getValue(ibgeId);
 		assertEquals("1100015", ibgeIDValue);
 		
-		CityHeaderBean uf = citiesHeaderBean.get(1);
+		HeaderBean uf = citiesHeaderBean.get(1);
 		String ufValue = firstLine.getValue(uf);
 		assertEquals("RO", ufValue);
 
-		CityHeaderBean name = citiesHeaderBean.get(2);
+		HeaderBean name = citiesHeaderBean.get(2);
 		String nameValue = firstLine.getValue(name);
 		assertEquals("Alta Floresta D'Oeste", nameValue);
 
-		CityHeaderBean capital = citiesHeaderBean.get(3);
+		HeaderBean capital = citiesHeaderBean.get(3);
 		String capitalValue = firstLine.getValue(capital);
 		assertEquals("", capitalValue);
 		
-		CityHeaderBean lon = citiesHeaderBean.get(4);
+		HeaderBean lon = citiesHeaderBean.get(4);
 		String lonValue = firstLine.getValue(lon);
 		assertEquals("-61.9998238963", lonValue);
 		
-		CityHeaderBean lat = citiesHeaderBean.get(5);
+		HeaderBean lat = citiesHeaderBean.get(5);
 		String latValue = firstLine.getValue(lat);
 		assertEquals("-11.9355403048", latValue);
 		
-		CityHeaderBean noAccents = citiesHeaderBean.get(6);
+		HeaderBean noAccents = citiesHeaderBean.get(6);
 		String noAccentsValue = firstLine.getValue(noAccents);
 		assertEquals("Alta Floresta D'Oeste", noAccentsValue);
 		
-		CityHeaderBean alternativeName = citiesHeaderBean.get(7);
+		HeaderBean alternativeName = citiesHeaderBean.get(7);
 		String alternativeNameValue = firstLine.getValue(alternativeName);
 		assertEquals("", alternativeNameValue);
 		
-		CityHeaderBean microRegion = citiesHeaderBean.get(8);
+		HeaderBean microRegion = citiesHeaderBean.get(8);
 		String microRegionValue = firstLine.getValue(microRegion);
 		assertEquals("Cacoal", microRegionValue);
 		
-		CityHeaderBean mesoregion = citiesHeaderBean.get(9);
+		HeaderBean mesoregion = citiesHeaderBean.get(9);
 		String mesoregionValue = firstLine.getValue(mesoregion);
 		assertEquals("Leste Rondoniense", mesoregionValue);
 		

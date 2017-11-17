@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import hodor.bean.city.CityDataBean;
+import hodor.bean.city.DataBean;
 import hodor.cmd.CommandFactory;
 import hodor.cmd.property.PropertyInterface;
 import hodor.database.DatabaseMemory;
@@ -30,24 +30,24 @@ public class CommandDistinct implements SubCommandInterface{
 		this.property = property;
 	}
 
-	public List<CityDataBean> getResult() {
-		ArrayList<CityDataBean> listCityDataBean = DatabaseMemory.getInstance().getListCityDataBean();
-		SortedSet<CityDataBean> distinctSet = createDistinctSet();
+	public List<DataBean> getResult() {
+		ArrayList<DataBean> listCityDataBean = DatabaseMemory.getInstance().getListCityDataBean();
+		SortedSet<DataBean> distinctSet = createDistinctSet();
 		distinctSet.addAll(listCityDataBean); 
 		
 		return sortedSetAsArrayList(listCityDataBean, distinctSet);
 	}
 
-	private ArrayList<CityDataBean> sortedSetAsArrayList(ArrayList<CityDataBean> listCityDataBean, SortedSet<CityDataBean> distinctSet) {
-		ArrayList<CityDataBean> listDistinctDataBean = new ArrayList<CityDataBean>();
+	private ArrayList<DataBean> sortedSetAsArrayList(ArrayList<DataBean> listCityDataBean, SortedSet<DataBean> distinctSet) {
+		ArrayList<DataBean> listDistinctDataBean = new ArrayList<DataBean>();
 		listDistinctDataBean.addAll(distinctSet);
 		
 		return listDistinctDataBean;
 	}
 
-	private SortedSet<CityDataBean> createDistinctSet() {
-		SortedSet<CityDataBean> setDistinct = new TreeSet<CityDataBean>(new Comparator<CityDataBean>(){
-		    public int compare(CityDataBean data1, CityDataBean data2) {
+	private SortedSet<DataBean> createDistinctSet() {
+		SortedSet<DataBean> setDistinct = new TreeSet<DataBean>(new Comparator<DataBean>(){
+		    public int compare(DataBean data1, DataBean data2) {
 		    	return data1.getLinePropertieValue().get(property.getName()).equals(data2.getLinePropertieValue().get(property.getName())) ? 0 : 1;
 		    }
 		});

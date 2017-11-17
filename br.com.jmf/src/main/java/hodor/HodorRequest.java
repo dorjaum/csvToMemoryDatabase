@@ -2,22 +2,17 @@ package hodor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import hodor.bean.city.CityDataBean;
 import hodor.cmd.CommandFactory;
 import hodor.cmd.type.CommandInterface;
 import hodor.csv.converter.CsvDatabaseMemoryBuilder;
-import hodor.exception.command.CommandNotExistException;
 import hodor.utils.StringUtils;
 
 public class HodorRequest {
 	
-	private String result = "";
+	private String response = "";
 	private static HodorRequest hodorRequest;
 	private CommandInterface command;
-	private static Logger LOGGER = Logger.getLogger(Hodor.class.getName());
 	
 	public static HodorRequest getInstance() {
 		if(hodorRequest == null) {
@@ -34,7 +29,7 @@ public class HodorRequest {
 	public HodorRequest execute(String request) {
 		List<String> commandList = getCommandList(request);
 		setCommand(CommandFactory.getCommand(commandList));
-		setResult(getCommand().getResult());
+		setResponse(getCommand().getResult());
 		printResult();
 		
 		return this;
@@ -45,19 +40,19 @@ public class HodorRequest {
 	}
 
 	private void printResult() {
-		System.out.println(getResult());
+		System.out.println(getResponse());
 	}
 
 	private void setCommand(CommandInterface command) {
 		this.command = command;
 	}
 
-	private void setResult(String result) {
-		this.result = result;
+	private void setResponse(String result) {
+		this.response = result;
 	}
 
-	public String getResult() {
-		return result;
+	public String getResponse() {
+		return response;
 	}
 	
 	private List<String> getCommandList(String commandInput) {

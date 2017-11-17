@@ -24,10 +24,6 @@ import hodor.exception.command.ValueException;
 
 public class CommandTest extends EnvironmentPreparationTest {
 
-	private static final String CMD_FILTER = "filter";
-	private static final String VALUE_12345 = "12345";
-	private static final String PROP_IBGE_ID = "ibge_id";
-
 	@Test
 	public void countInstance() {
 		ArrayList<String> listCommand = new ArrayList<String>();
@@ -46,15 +42,6 @@ public class CommandTest extends EnvironmentPreparationTest {
 	@Test(expected = CommandNotExistException.class)
 	public void commandNotExistNullString() {
 		getCommand(null, new ArrayList<String>());
-	}
-
-	@Test
-	public void commandFilter() {
-		ArrayList<String> subCommand = new ArrayList<String>();
-		subCommand.add(PROP_IBGE_ID);
-		subCommand.add(VALUE_12345);
-		CommandInterface filter = getCommand(CMD_FILTER, subCommand);
-		Assert.assertTrue(filter instanceof CommandFilter);
 	}
 
 	@Test(expected = PropertyException.class)

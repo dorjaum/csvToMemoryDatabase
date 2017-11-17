@@ -1,18 +1,13 @@
 package hodor.bean.city;
 
-import java.util.Collection;
 import java.util.Map;
 
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import jdk.nashorn.internal.parser.JSONParser;
-import jdk.nashorn.internal.runtime.JSONFunctions;
-
-public class CityDataBean {
+public class DataBean {
 
 	private long idLine;
 	private Map<String, String> linePropertieValue;
 	
-	public CityDataBean(Map<String, String> propertieValue) {
+	public DataBean(Map<String, String> propertieValue) {
 		this.linePropertieValue = propertieValue;
 	}
 
@@ -24,7 +19,7 @@ public class CityDataBean {
 		this.linePropertieValue = linePropertieValue;
 	}
 
-	public String getValue(CityHeaderBean headerBean) {
+	public String getValue(HeaderBean headerBean) {
 		return getLinePropertieValue().get(headerBean.getName());
 	}
 

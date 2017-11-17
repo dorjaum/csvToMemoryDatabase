@@ -15,7 +15,7 @@ public class HodorRequestTest {
 	public void countAsterisk() {
 		HodorRequest hodor = HodorRequest.getInstance();
 		hodor.execute("count *");
-		String result = hodor.getResult();
+		String result = hodor.getResponse();
 
 		Assert.assertEquals(format(CommandCount.PREFIX_RESPONSE_COUNTED_TOTAL_OF, "5565"), result);
 	}
@@ -23,8 +23,8 @@ public class HodorRequestTest {
 	@Test
 	public void countDistinctPropertyIbgeId() {
 		HodorRequest hodor = HodorRequest.getInstance();
-		hodor.execute("count distinct ibge_id");
-		String result = hodor.getResult();
+		hodor.execute("count distinct    ibge_id");
+		String result = hodor.getResponse();
 		
 		Assert.assertEquals(format(CommandCount.PREFIX_RESPONSE_COUNTED_TOTAL_OF, "5565"), result);
 	}
@@ -33,7 +33,7 @@ public class HodorRequestTest {
 	public void countDistinctPropertyUf() {
 		HodorRequest hodor = HodorRequest.getInstance();
 		hodor.execute("count distinct uf");
-		String result = hodor.getResult();
+		String result = hodor.getResponse();
 		
 		Assert.assertEquals(format(CommandCount.PREFIX_RESPONSE_COUNTED_TOTAL_OF, "27") , result);
 	}
@@ -42,7 +42,7 @@ public class HodorRequestTest {
 	public void countDistinctPropertyAlternativeNames() {
 		HodorRequest hodor = HodorRequest.getInstance();
 		hodor.execute("count distinct alternative_names");
-		String result = hodor.getResult();
+		String result = hodor.getResponse();
 		
 		Assert.assertEquals(format(CommandCount.PREFIX_RESPONSE_COUNTED_TOTAL_OF, "4") , result);
 	}
