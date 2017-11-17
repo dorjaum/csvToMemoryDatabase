@@ -1,7 +1,7 @@
 A program initally implemented to readCsvData and load the data to a databaseMemory, where the user can execute some simple commands like:
 ###   > TYPE "EXIT" TO STOP EXECUTION 									 
 ###   > "holdor", to know what holdor says.
-###   > count * ");
+###   > count *
 ###   > count distinct [property]
 ###   > filter [property] [value]
 ### 
