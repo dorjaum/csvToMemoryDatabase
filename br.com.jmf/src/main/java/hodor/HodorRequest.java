@@ -23,7 +23,8 @@ public class HodorRequest {
 	}
 	
 	private HodorRequest() {
-		CsvDatabaseMemoryBuilder.execute();
+		CsvDatabaseMemoryBuilder csvDatabaseMemoryBuilder = new CsvDatabaseMemoryBuilder();
+		csvDatabaseMemoryBuilder.execute();
 	}
 	
 	public HodorRequest execute(String request) {

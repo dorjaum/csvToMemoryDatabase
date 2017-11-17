@@ -17,7 +17,8 @@ public class CsvDataConverterTest {
 	
 	@Before
 	public void initializeDatabaseMemory() {
-		CsvDatabaseMemoryBuilder.execute();
+		CsvDatabaseMemoryBuilder csvDatabaseMemoryBuilder = new CsvDatabaseMemoryBuilder();
+		csvDatabaseMemoryBuilder.execute();
 	}
 	
 	@Test

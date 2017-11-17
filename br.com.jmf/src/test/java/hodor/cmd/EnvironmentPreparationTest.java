@@ -16,6 +16,7 @@ public class EnvironmentPreparationTest {
 	
 	@Before
 	public void before() {
-		CsvDatabaseMemoryBuilder.execute();
+		CsvDatabaseMemoryBuilder csvDatabaseMemoryBuilder = new CsvDatabaseMemoryBuilder();
+		csvDatabaseMemoryBuilder.execute();
 	}
 }

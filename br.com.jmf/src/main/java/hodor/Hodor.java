@@ -44,6 +44,7 @@ public class Hodor {
 			LOGGER.log(Level.WARNING, e.getMessage());
 		}
 	}
+	
 	private static void printInstructions() {
 		System.out.println(" ###################################################################### ");
 		System.out.println(" ### TYPE EXIT TO STOP EXECUTION 									 ");
